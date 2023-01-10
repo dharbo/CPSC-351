@@ -1,5 +1,6 @@
 #include <stdlib.h>  // NULL, malloc(), free()
 #include <assert.h>  // assert()
+#include <pthread.h>
 
 #include "stack.h"
 
@@ -26,14 +27,10 @@ static int isValid( Stack * stack )
   // verify stack really points to something, presumably a stack
   assert( stack );
 
-  pthread_mutex_lock(&stack->lock);
-
   // Verify the number of nodes in the stack matches the stack's size
   unsigned count = stack->_size;
 
   for(StackNode * current = stack->_top;  current;  current = current->_next)  --count;
-
-  pthread_mutex_unlock(&stack->lock);
 
   return count == 0;
 }
@@ -45,6 +42,7 @@ static int isValid( Stack * stack )
 *******************************************************************************/
 void push( Stack * stack, value_t data )
 {
+  pthread_mutex_lock(&stack->lock);
 
   // To help detect stack integrity problems, verify consistency between "top" and "size" attributes
   assert( stack && isValid(stack) );
@@ -54,8 +52,6 @@ void push( Stack * stack, value_t data )
 
   // populate the new node with data
   newNode->_data = data;
-  
-  pthread_mutex_lock(&stack->lock);
 
   // link the new node onto the top of the stack and advance the stack top
   newNode->_next = stack->_top;
@@ -71,18 +67,17 @@ void push( Stack * stack, value_t data )
 
 value_t pop( Stack * stack )
 {
+  pthread_mutex_lock(&stack->lock);
 
   // To help detect stack integrity problems, verify consistency between "top" and "size" attributes
   assert( stack && isValid(stack) );
-  
 
   // What to do if asked to return data from an empty stack?
   if( isEmpty( stack ) ) // is empty?
   {
+    pthread_mutex_unlock(&stack->lock);
     return (value_t)0;
   }
-
-  pthread_mutex_lock(&stack->lock);
 
   // advance the top of the stack to the next element
   StackNode * temp = stack->_top;
@@ -110,12 +105,5 @@ int isEmpty( Stack * stack )
   // To help detect stack integrity problems, verify consistency between "top" and "size" attributes
   assert( stack && isValid(stack) );
 
-  // pthread_mutex_lock(&stack->lock);
-  // if (stack->_top == NULL) {
-  //   pthread_mutex_unlock(&stack->lock);
-  //   return 1;
-  // }
-  // pthread_mutex_unlock(&stack->lock);
-  // return 0;
   return stack->_top == NULL;
 }

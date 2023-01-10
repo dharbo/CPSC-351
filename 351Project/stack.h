@@ -1,6 +1,5 @@
 #pragma once
 #include <stdlib.h>  // NULL
-#include <pthread.h>
 
 /*******************************************************************************
 ** Public type declarations
