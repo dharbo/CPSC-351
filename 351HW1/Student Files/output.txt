@@ -1,0 +1,10 @@
+parent wrote:   
+Hello world! CPSC 351 "Operating System Concepts" Rocks!
+My name is:  David Harboyan
+My CWID is:  887059103
+
+
+child read:     
+Hello world! CPSC 351 "Operating System Concepts" Rocks!
+My name is:  David Harboyan
+My CWID is:  887059103

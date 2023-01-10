@@ -1,0 +1,9 @@
+total 88
+-rwxr-xr-x 1 dharbo dharbo   594 Jul 15  2019 build.sh
+-rwxrwxr-x 1 dharbo dharbo 77832 Nov  6 12:38 time
+-rw-rw-r-- 1 dharbo dharbo  4018 Nov  3 13:42 time_pipe.c
+-rw-rw-r-- 1 dharbo dharbo     0 Nov  6 12:46 time_pipe_output.txt
+
+Elapsed time: 0.002803 seconds
+IPC Method: Anonymous Pipe
+Command: ls -l 

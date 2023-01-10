@@ -1,0 +1,9 @@
+total 84
+-rwxr-xr-x 1 dharbo dharbo   594 Jul 15  2019 build.sh
+-rwxrwxr-x 1 dharbo dharbo 77808 Nov  6 12:47 time
+-rw-rw-r-- 1 dharbo dharbo  3928 Nov  3 14:21 time_shm.c
+-rw-rw-r-- 1 dharbo dharbo     0 Nov  6 12:48 time_shm_output.txt
+
+Elapsed time: 0.002614 seconds
+IPC Method: Shared Memory
+Command: ls -l 
